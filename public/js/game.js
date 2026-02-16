@@ -255,9 +255,12 @@ export class Game {
   }
 
   finishLineClear() {
-    // Remove cleared lines
+    // Remove cleared lines (bottom to top so indices stay valid)
     for (const y of this.clearedLines.sort((a, b) => b - a)) {
       this.board.splice(y, 1);
+    }
+    // Add empty rows at top
+    while (this.board.length < TOTAL_ROWS) {
       this.board.unshift(Array(COLS).fill(null));
     }
     this.clearedLines = [];
