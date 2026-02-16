@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TETRIS 1v1</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Menu Screen -->
+  <div id="menu-screen">
+    <h1>TETRIS</h1>
+    <p class="subtitle">1 v 1 Online Battle</p>
+    <input type="text" id="name-input" class="name-input" placeholder="名前を入力" maxlength="12" autocomplete="off">
+    <button class="btn" id="play-btn">PLAY</button>
+  </div>
+
+  <!-- Game Screen -->
+  <div id="game-screen" class="hidden">
+    <!-- Left panel: Hold + Stats -->
+    <div class="side-panel">
+      <div class="panel-box hold-box">
+        <h3>Hold</h3>
+        <canvas id="hold-preview" width="80" height="60"></canvas>
+      </div>
+      <div class="panel-box">
+        <h3>Score</h3>
+        <div class="value" id="score">0</div>
+      </div>
+      <div class="panel-box">
+        <h3>Level</h3>
+        <div class="value" id="level">1</div>
+      </div>
+      <div class="panel-box">
+        <h3>Lines</h3>
+        <div class="value" id="lines-count">0</div>
+      </div>
+    </div>
+
+    <!-- Center: Player board -->
+    <div class="board-area">
+      <div class="player-name" id="my-name"></div>
+      <canvas id="game-canvas"></canvas>
+      <div id="pending-garbage"></div>
+    </div>
+
+    <!-- Right panel: Next + Opponent -->
+    <div class="side-panel">
+      <div class="panel-box">
+        <h3>Next</h3>
+        <div class="preview-list">
+          <canvas id="next-0" width="80" height="60"></canvas>
+          <canvas id="next-1" width="80" height="60"></canvas>
+          <canvas id="next-2" width="80" height="60"></canvas>
+        </div>
+      </div>
+      <div class="opponent-area">
+        <h3 id="opponent-name">Opponent</h3>
+        <canvas id="opponent-canvas"></canvas>
+      </div>
+    </div>
+
+    <!-- Controls guide -->
+    <div class="controls-guide">
+      <span><kbd>&larr;</kbd><kbd>&darr;</kbd><kbd>&rarr;</kbd> Move</span>
+      <span><kbd>&uarr;</kbd><kbd>X</kbd> Rotate</span>
+      <span><kbd>Z</kbd> Reverse</span>
+      <span><kbd>Space</kbd> Drop</span>
+      <span><kbd>Shift</kbd><kbd>C</kbd> Hold</span>
+    </div>
+
+    <!-- Overlays -->
+    <div id="countdown-overlay" class="hidden">
+      <div id="countdown-text"></div>
+    </div>
+    <div id="waiting-overlay" class="hidden">
+      <div class="spinner"></div>
+      <p>Waiting for opponent...</p>
+    </div>
+  </div>
+
+  <!-- Result Screen -->
+  <div id="result-screen" class="hidden">
+    <h1 id="result-title" class="result-win">YOU WIN!</h1>
+    <p id="result-message"></p>
+    <div class="btn-group">
+      <button class="btn" id="rematch-btn">REMATCH</button>
+      <button class="btn btn-secondary" id="menu-btn">MENU</button>
+    </div>
+    <p id="rematch-status"></p>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>
